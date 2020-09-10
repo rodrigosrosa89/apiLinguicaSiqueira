@@ -4,14 +4,35 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+
+@Entity
 public class Linguica {
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
+	
 	private String nomeProduto;
 	private LocalDateTime dataFabricacao = LocalDateTime.now();
+	
+	@Enumerated(EnumType.STRING)
 	private StatusLinguicaEnum status = StatusLinguicaEnum.AGUARDANDO_PEDIDO;
+	
+	@ManyToOne
 	private Cliente cliente;
+	
+	@ManyToOne
 	private Categoria categoria;
+	
+	@OneToMany(mappedBy = "linguica")
 	private List<Venda> vendas = new ArrayList<>();
 
 	public Linguica(String nomeProduto, Cliente cliente, Categoria categoria) {
