@@ -7,15 +7,17 @@ import javax.persistence.Id;
 
 @Entity
 public class Categoria {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
-	
+
 	private String nome;
 
+	public Categoria() {
+	}
+
 	public Categoria(String nome) {
-		super();
 		this.nome = nome;
 	}
 

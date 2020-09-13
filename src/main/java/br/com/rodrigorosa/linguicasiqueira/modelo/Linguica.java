@@ -20,7 +20,7 @@ public class Linguica {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 	
-	private String nomeProduto;
+	private String nome;
 	private LocalDateTime dataFabricacao = LocalDateTime.now();
 	
 	@Enumerated(EnumType.STRING)
@@ -34,9 +34,13 @@ public class Linguica {
 	
 	@OneToMany(mappedBy = "linguica")
 	private List<Venda> vendas = new ArrayList<>();
+	
+	public Linguica() {
+		
+	}
 
 	public Linguica(String nomeProduto, Cliente cliente, Categoria categoria) {
-		this.nomeProduto = nomeProduto;
+		this.nome = nomeProduto;
 		this.cliente = cliente;
 		this.categoria = categoria;
 	}
@@ -49,7 +53,7 @@ public class Linguica {
 		result = prime * result + ((cliente == null) ? 0 : cliente.hashCode());
 		result = prime * result + ((dataFabricacao == null) ? 0 : dataFabricacao.hashCode());
 		result = prime * result + (int) (id ^ (id >>> 32));
-		result = prime * result + ((nomeProduto == null) ? 0 : nomeProduto.hashCode());
+		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
 		result = prime * result + ((status == null) ? 0 : status.hashCode());
 		result = prime * result + ((vendas == null) ? 0 : vendas.hashCode());
 		return result;
@@ -81,10 +85,10 @@ public class Linguica {
 			return false;
 		if (id != other.id)
 			return false;
-		if (nomeProduto == null) {
-			if (other.nomeProduto != null)
+		if (nome == null) {
+			if (other.nome != null)
 				return false;
-		} else if (!nomeProduto.equals(other.nomeProduto))
+		} else if (!nome.equals(other.nome))
 			return false;
 		if (status != other.status)
 			return false;
@@ -105,11 +109,11 @@ public class Linguica {
 	}
 
 	public String getNomeProduto() {
-		return nomeProduto;
+		return nome;
 	}
 
 	public void setNomeProduto(String nomeProduto) {
-		this.nomeProduto = nomeProduto;
+		this.nome = nomeProduto;
 	}
 
 	public LocalDateTime getDataFabricacao() {

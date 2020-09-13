@@ -1,25 +1,26 @@
 package br.com.rodrigorosa.linguicasiqueira.controller;
 
-import java.util.Arrays;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.rodrigorosa.linguicasiqueira.controller.dto.LinguicaDto;
-import br.com.rodrigorosa.linguicasiqueira.modelo.Categoria;
-import br.com.rodrigorosa.linguicasiqueira.modelo.Cliente;
 import br.com.rodrigorosa.linguicasiqueira.modelo.Linguica;
+import br.com.rodrigorosa.linguicasiqueira.repository.LinguicaRepository;
 
 @RestController
 public class LinguicasController {
+	
+	@Autowired
+	LinguicaRepository linguicaRepository; 
 
 	@RequestMapping("/linguicas")
 	public List<LinguicaDto> lista() {
-		Linguica linguica = new Linguica("Linguiça de porco apimentada",
-				new Cliente("Fulano", "fulano@hotmail.com", "31999999999"), new Categoria("Porco"));
+		List<Linguica> linguicas = linguicaRepository.findAll();
 
-		return LinguicaDto.converter(Arrays.asList(linguica, linguica, linguica));
+		return LinguicaDto.converter(linguicas);
 	}
 
 }
