@@ -1,5 +1,6 @@
 package br.com.rodrigorosa.linguicasiqueira.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,8 +18,15 @@ public class LinguicasController {
 	LinguicaRepository linguicaRepository; 
 
 	@RequestMapping("/linguicas")
-	public List<LinguicaDto> lista() {
-		List<Linguica> linguicas = linguicaRepository.findAll();
+	public List<LinguicaDto> lista(String nome) {
+		List<Linguica> linguicas = new ArrayList<>();
+		if (nome == null) {
+			linguicas = linguicaRepository.findAll();
+		} else {
+			linguicas = linguicaRepository.carregarPorNomeCategoria(nome);
+		}
+		
+		System.out.println(linguicas.size());
 
 		return LinguicaDto.converter(linguicas);
 	}
