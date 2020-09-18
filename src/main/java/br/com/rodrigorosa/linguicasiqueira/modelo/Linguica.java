@@ -44,6 +44,12 @@ public class Linguica {
 		this.cliente = cliente;
 		this.categoria = categoria;
 	}
+	
+	public Linguica(String nomeProduto, Categoria categoria) {
+		this.nome = nomeProduto;
+		this.categoria = categoria;
+	}
+
 
 	@Override
 	public int hashCode() {
